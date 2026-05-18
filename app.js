@@ -1,7 +1,7 @@
 /* ================================================================
    app.js — BookShelf | Vanilla JS Learning Project
    ================================================================
-   CONCEPTS COVERED (each section is labelled):
+   CONCEPTS COVERED (each section is labeled):
      1. Variables & Data Types
      2. Objects & Arrays
      3. Functions
@@ -28,7 +28,7 @@
 ================================================================ */
 
 const APP_NAME   = "BookShelf"; // string constant
-const MAX_RATING = 5;           // number constant
+const MAX_RATING = 5;          // number constant
 let   currentFilter = "all";    // changes when the user clicks a filter
 
 console.log(`%c${APP_NAME} loaded ✓`, "color: #f5a623; font-weight: bold;");
@@ -53,8 +53,7 @@ console.log(`%c${APP_NAME} loaded ✓`, "color: #f5a623; font-weight: bold;");
    }
 ================================================================ */
 
-// Start with an empty array; loadBooks() fills it from localStorage.
-let books = [];
+let books = []; // Start with an empty array; loadBooks() fills it from localStorage.
 
 
 /* ================================================================
@@ -63,12 +62,11 @@ let books = [];
    document.getElementById("id")     — find one element by id
    document.querySelectorAll(".cls") — find elements by CSS selector
    element.textContent = "hello"     — change text
-   element.innerHTML   = "<b>hi</b>" — set HTML (careful with user input)
+   element.innerHTML  = "<b>hi</b>" — set HTML (careful with user input)
    element.classList.add("active")   — add a CSS class
    element.hidden = true             — show / hide an element
 
-   We grab all references once here so we don't search the DOM
-   repeatedly throughout the code.
+   We grab all references once here  so we don't search the DOM repeatedly throughout the code.
 ================================================================ */
 
 // Form inputs
@@ -81,22 +79,18 @@ const inputNotes  = document.getElementById("input-notes");
 const btnAdd      = document.getElementById("btn-add");
 const errorMsg    = document.getElementById("error-msg");
 const starPicker  = document.getElementById("star-picker");
-
 // Book list
 const bookGrid   = document.getElementById("book-grid");
 const emptyState = document.getElementById("empty-state");
-
 // Header stats
 const countTotal    = document.getElementById("count-total");
 const countReading  = document.getElementById("count-reading");
 const countDone     = document.getElementById("count-done");
 const countWishlist = document.getElementById("count-wishlist");
-
 // Quote section
 const quoteText   = document.getElementById("quote-text");
 const quoteAuthor = document.getElementById("quote-author");
 const btnFetch    = document.getElementById("btn-fetch-quote");
-
 // Concept console panel
 const conceptConsole   = document.getElementById("concept-console");
 const consoleBody      = document.getElementById("console-body");
@@ -109,14 +103,13 @@ const btnConsoleToggle = document.getElementById("console-toggle");
    ----------------------------------------------------------------
    Functions are reusable blocks of code.
 
-   Declaration:   function doThing() { ... }
-   Arrow:         const doThing = () => { ... }
+    Declaration:   function doThing() { ... }
+    Arrow:         const doThing = () => { ... }
 
-   Arrow functions are shorter and common in modern JS.
+   Arrow functions are shorter & common in modern JS.
 ================================================================ */
 
-// Generate a unique ID from the current timestamp.
-const generateId = () => String(Date.now());
+const generateId = () => String(Date.now()); // Generate a unique ID from the current timestamp
 
 // Format an ISO date string into a readable label.
 const formatDate = (isoString) => {
@@ -159,6 +152,7 @@ function escapeHtml(str) {
    ----------------------------------------------------------------
    if / else if / else — run code when a condition is true
    ternary:  condition ? ifTrue : ifFalse
+
    &&  both sides must be true
    ||  at least one side must be true
 ================================================================ */
@@ -203,8 +197,8 @@ function hideError() {
 ================================================================ */
 
 function renderBooks() {
-  // .filter() returns a NEW array — it does not change the original.
-  const filteredBooks = books.filter((book) => {
+
+  const filteredBooks = books.filter((book) => {  // .filter() returns a NEW array — it does not change the original
     if (currentFilter === "all") return true;
     return book.status === currentFilter;
   });
@@ -215,7 +209,6 @@ function renderBooks() {
     emptyState.hidden = false;
     return;
   }
-
   emptyState.hidden = true;
 
   filteredBooks.forEach((book) => {
@@ -230,7 +223,7 @@ function createBookCard(book) {
   card.classList.add("book-card");
   card.dataset.status = book.status;
 
-  // Template literal — backtick string that spans lines and embeds ${expressions}
+  // Template literal — backtick string that spans lines & embeds ${expressions}
   card.innerHTML = `
     <div class="card-top">
       <div>
@@ -312,7 +305,7 @@ function addBook() {
 }
 
 function deleteBook(id) {
-  // .findIndex() returns the array position of the match, or -1.
+  // .findIndex() returns the array position of the match, / -1.
   const index = books.findIndex((book) => book.id === id);
   if (index === -1) return;
 
@@ -379,13 +372,12 @@ function loadBooks() {
 /* ================================================================
    9 — ASYNC / AWAIT & FETCH API
    ----------------------------------------------------------------
-   Some work takes time (e.g. downloading data). JS handles this
-   without freezing the page using asynchronous code.
+   Some work takes time (e.g. downloading data). JS handles this without freezing the page using Asynchronous code.
 
-   async function  — marks a function that may use await
-   await           — pause until a Promise resolves
+    async function  — marks a function that may use await.
+    await           — pause until a Promise resolves
 
-   fetch(url) downloads data and returns a Promise:
+   fetch(url) downloads data &  returns a Promise:
      const response = await fetch(url);      // get the response
      const data     = await response.json(); // parse the body
 
@@ -423,7 +415,7 @@ async function fetchQuote() {
     logConcept("Error", error.message);
 
   } finally {
-    // finally runs whether the request succeeded or failed.
+    // finally runs whether the request succeeded / failed.
     btnFetch.textContent = "Fetch Quote";
     btnFetch.disabled    = false;
   }
@@ -434,7 +426,7 @@ async function fetchQuote() {
    5 — EVENTS & EVENT LISTENERS
    ----------------------------------------------------------------
    addEventListener(type, callback) tells the browser: "when this
-   event fires on this element, run this function."
+    event fires on this element, run this function."
 
    Common types: "click", "input", "change", "keydown"
 ================================================================ */
@@ -447,11 +439,12 @@ inputTitle.addEventListener("keydown", (event) => {
   if (event.key === "Enter") addBook();
 });
 
-// querySelectorAll returns a NodeList — we loop over it with forEach.
+// querySelectorAll  returns a NodeList — we loop over it with forEach.
 const filterBtns = document.querySelectorAll(".filter-btn");
 
 filterBtns.forEach((btn) => {
   btn.addEventListener("click", () => {
+
     currentFilter = btn.dataset.filter; // read the data-filter HTML attribute
     filterBtns.forEach((b) => b.classList.remove("active"));
     btn.classList.add("active");
@@ -471,12 +464,11 @@ btnConsoleClose.addEventListener("click",  () => conceptConsole.classList.add("h
 function logConcept(concept, detail) {
   const entry = document.createElement("div");
   entry.classList.add("log-entry");
-  entry.innerHTML = `<span class="log-tag">[${concept}]</span><span class="log-value">${detail}</span>`;
+  entry.innerHTML = `<span class="log-tag">[${concept}]</span> <span class="log-value">${detail}</span>`;
   consoleBody.prepend(entry);
 
-  // Trim old entries past 30.
   const entries = consoleBody.querySelectorAll(".log-entry");
-  if (entries.length > 30) entries[entries.length - 1].remove();
+  if (entries.length > 30) entries[entries.length - 1].remove();  // Trim old entries past 30
 }
 
 
@@ -550,7 +542,7 @@ init();
 /*
   DEBUGGING TIPS
   --------------
-  Open DevTools (F12) → Console and try:
+  Open DevTools (F12) → Console & try:
 
     books             → the full array of book objects
     books[0]          → inspect one book
@@ -558,6 +550,5 @@ init();
     currentFilter     → the active filter value
     localStorage      → all stored keys
 
-  Add  debugger;  anywhere in this file to pause JS and step
-  through code line-by-line in the Sources panel.
+  Add  debugger;  anywhere in this file to pause JS & step through code line-by-line in the Sources panel.
 */
