@@ -8,138 +8,129 @@
 </head>
 <body>
 
-  <!-- ============================================================
-    CONCEPT: DOM Structure
-    The browser reads this HTML & builds a "tree" of elements
-     called the DOM (Document Object Model). JavaScript can then
-     find, read, & change these elements.
-  ============================================================ -->
+<div class="bg-grid"></div>
 
-  <div class="bg-grid"></div>
-
-  <header class="site-header">
-    <div class="header-inner">
-      <div class="logo">
-        <span class="logo-icon">📚</span>
-        <span class="logo-text">BookShelf</span>
-      </div>
-      <p class="tagline">Your personal reading tracker — built with Vanilla JS</p>
+<!-- ── Header ─────────────────────────────────────────────── -->
+<header class="site-header">
+  <div class="header-inner">
+    <div class="logo">
+      <span class="logo-icon">📚</span>
+      <span class="logo-text">BookShelf</span>
     </div>
-    <!-- Stats bar: updated dynamically by JS -->
-    <div class="stats-bar">
-      <div class="stat-pill" id="stat-total">
-        <span class="stat-num" id="count-total">0</span>
-        <span class="stat-label">Total Books</span>
-      </div>
-      <div class="stat-pill" id="stat-reading">
-        <span class="stat-num" id="count-reading">0</span>
-        <span class="stat-label">Reading</span>
-      </div>
-      <div class="stat-pill" id="stat-done">
-        <span class="stat-num" id="count-done">0</span>
-        <span class="stat-label">Finished</span>
-      </div>
-      <div class="stat-pill" id="stat-wishlist">
-        <span class="stat-num" id="count-wishlist">0</span>
-        <span class="stat-label">Wishlist</span>
-      </div>
-    </div>
-  </header>
-
-  <main class="main-layout">
-
-    <!-- ── LEFT PANEL: Add a Book ─────────────────────────── -->
-    <aside class="panel panel-add">
-      <h2 class="panel-title">Add a Book</h2>
-
-      <!-- CONCEPT: Form inputs — we read their values in JS -->
-      <div class="form-group">
-        <label for="input-title">Book Title *</label>
-        <input type="text" id="input-title" placeholder="e.g. The Hobbit" autocomplete="off" />
-      </div>
-
-      <div class="form-group">
-        <label for="input-author">Author *</label>
-        <input type="text" id="input-author" placeholder="e.g. J.R.R. Tolkien" autocomplete="off" />
-      </div>
-
-      <div class="form-group">
-        <label for="input-pages">Page Count</label>
-        <input type="number" id="input-pages" placeholder="e.g. 310" min="1" />
-      </div>
-
-      <div class="form-group">
-        <label for="input-status">Status</label>
-        <select id="input-status">
-          <option value="wishlist">📋 Wishlist</option>
-          <option value="reading">📖 Currently Reading</option>
-          <option value="done">✅ Finished</option>
-        </select>
-      </div>
-
-      <div class="form-group">
-        <label for="input-rating">Rating (1–5)</label>
-        <div class="star-picker" id="star-picker">
-          <!-- Stars are injected by JS — see app.js -->
-        </div>
-        <input type="hidden" id="input-rating" value="0" />
-      </div>
-
-      <div class="form-group">
-        <label for="input-notes">Notes</label>
-        <textarea id="input-notes" placeholder="What do you think so far?" rows="3"></textarea>
-      </div>
-
-      <!-- Clicking this button triggers our JS event listener -->
-      <button class="btn btn-primary" id="btn-add">+ Add Book</button>
-
-      <div class="error-msg" id="error-msg" hidden></div>
-
-      <!-- ── Fetch a Quote ────────────────────────────────── -->
-      <div class="quote-box">
-        <p class="quote-label">✨ Reading Quote</p>
-        <p class="quote-text" id="quote-text">Click below to fetch a quote...</p>
-        <p class="quote-author" id="quote-author"></p>
-        <button class="btn btn-ghost" id="btn-fetch-quote">Fetch Quote</button>
-      </div>
-    </aside>
-
-    <!-- ── RIGHT PANEL: Book List ──────────────────────────── -->
-    <section class="panel panel-list">
-      <div class="list-header">
-        <h2 class="panel-title">My Library</h2>
-        <div class="filter-row">
-          <button class="filter-btn active" data-filter="all">All</button>
-          <button class="filter-btn" data-filter="reading">Reading</button>
-          <button class="filter-btn" data-filter="done">Finished</button>
-          <button class="filter-btn" data-filter="wishlist">Wishlist</button>
-        </div>
-      </div>
-
-      <!-- Books are injected here by JS -->
-      <div class="book-grid" id="book-grid"></div>
-
-      <!-- Shown when no books match the filter -->
-      <div class="empty-state" id="empty-state">
-        <p class="empty-icon">🔍</p>
-        <p class="empty-text">No books here yet.<br/>Add one on the left!</p>
-      </div>
-    </section>
-
-  </main>
-
-  <!-- ── CONCEPT CONSOLE ─────────────────────────────────────── -->
-  <!-- A mini console to visualize JS concepts in the UI -->
-  <div class="concept-console" id="concept-console">
-    <div class="console-header">
-      <span>🖥 JS Concept Log</span>
-      <button class="console-close" id="console-close">✕</button>
-    </div>
-    <div class="console-body" id="console-body"></div>
+    <p class="tagline">Your personal reading tracker — built with Vanilla JS</p>
   </div>
-  <button class="console-toggle" id="console-toggle">🖥 Concept Log</button>
 
-  <!-- Load our JavaScript LAST so the DOM is ready -->
-  <script src="app.js"></script>
+  <!-- Stats: numbers are updated by JS -->
+  <div class="stats-bar">
+    <div class="stat-pill">
+      <span class="stat-num" id="count-total">0</span>
+      <span class="stat-label">Total Books</span>
+    </div>
+    <div class="stat-pill">
+      <span class="stat-num" id="count-reading">0</span>
+      <span class="stat-label">Reading</span>
+    </div>
+    <div class="stat-pill">
+      <span class="stat-num" id="count-done">0</span>
+      <span class="stat-label">Finished</span>
+    </div>
+    <div class="stat-pill">
+      <span class="stat-num" id="count-wishlist">0</span>
+      <span class="stat-label">Wishlist</span>
+    </div>
+  </div>
+</header>
+
+<main class="main-layout">
+
+  <!-- ── Left panel: Add a book ────────────────────────────── -->
+  <aside class="panel panel-add">
+    <h2 class="panel-title">Add a Book</h2>
+
+    <div class="form-group">
+      <label for="input-title">Book Title *</label>
+      <input type="text" id="input-title" placeholder="e.g. The Hobbit" autocomplete="off" />
+    </div>
+
+    <div class="form-group">
+      <label for="input-author">Author *</label>
+      <input type="text" id="input-author" placeholder="e.g. J.R.R. Tolkien" autocomplete="off" />
+    </div>
+
+    <div class="form-group">
+      <label for="input-pages">Page Count</label>
+      <input type="number" id="input-pages" placeholder="e.g. 310" min="1" />
+    </div>
+
+    <div class="form-group">
+      <label for="input-status">Status</label>
+      <select id="input-status">
+        <option value="wishlist">📋 Wishlist</option>
+        <option value="reading">📖 Currently Reading</option>
+        <option value="done">✅ Finished</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="input-rating">Rating (1–5)</label>
+      <!-- Stars are injected here by buildStarPicker() in app.js -->
+      <div class="star-picker" id="star-picker"></div>
+      <input type="hidden" id="input-rating" value="0" />
+    </div>
+
+    <div class="form-group">
+      <label for="input-notes">Notes</label>
+      <textarea id="input-notes" placeholder="What do you think so far?" rows="3"></textarea>
+    </div>
+
+    <button class="btn btn-primary" id="btn-add">+ Add Book</button>
+
+    <div class="error-msg" id="error-msg" hidden></div>
+
+    <!-- Fetch quote (demonstrates async/await + fetch) -->
+    <div class="quote-box">
+      <p class="quote-label">✨ Reading Quote</p>
+      <p class="quote-text" id="quote-text">Click below to fetch a quote...</p>
+      <p class="quote-author" id="quote-author"></p>
+      <button class="btn btn-ghost" id="btn-fetch-quote">Fetch Quote</button>
+    </div>
+  </aside>
+
+  <!-- ── Right panel: Book list ─────────────────────────────── -->
+  <section class="panel panel-list">
+    <div class="list-header">
+      <h2 class="panel-title">My Library</h2>
+
+      <div class="filter-row">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="reading">Reading</button>
+        <button class="filter-btn" data-filter="done">Finished</button>
+        <button class="filter-btn" data-filter="wishlist">Wishlist</button>
+      </div>
+    </div>
+
+    <!-- Book cards are injected here by renderBooks() in app.js -->
+    <div class="book-grid" id="book-grid"></div>
+
+    <div class="empty-state" id="empty-state">
+      <p class="empty-icon">🔍</p>
+      <p class="empty-text">No books here yet.<br/>Add one on the left!</p>
+    </div>
+  </section>
+
+</main>
+
+<!-- ── Concept Log panel ─────────────────────────────────────── -->
+<div class="concept-console" id="concept-console">
+  <div class="console-header">
+    <span>🖥 JS Concept Log</span>
+    <button class="console-close" id="console-close">✕</button>
+  </div>
+  <div class="console-body" id="console-body"></div>
+</div>
+<button class="console-toggle" id="console-toggle">🖥 Concept Log</button>
+
+<!-- app.js is loaded last so the DOM above is fully parsed first -->
+<script src="app.js"></script>
 </body>
 </html>
